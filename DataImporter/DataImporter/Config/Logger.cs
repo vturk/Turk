@@ -18,9 +18,9 @@ namespace DataImporter.Config
         //    BasicConfigurator.Configure();
         //}
 
-        public static void Log(string text)
+        public static void Log(string method, string file, string text)
         {
-            log.Info(text);
+            log.Info(string.Format("Method: {0} File: {1} Message: {2}", method, file, text));
         }
     }
 }

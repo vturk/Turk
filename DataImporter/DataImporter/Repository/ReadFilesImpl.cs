@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataImporter.Config;
+using DataImporter.Models;
 
 namespace DataImporter.Repository
 {
@@ -46,7 +47,7 @@ namespace DataImporter.Repository
                 }
                 catch (Exception ex)
                 {
-                    //lblError.Text = ex.Message;
+                    Logger.Log("ProcessDirectory", PathName, ex.Message);
                 }
             }
 
@@ -55,49 +56,63 @@ namespace DataImporter.Repository
 
         public void ParseLinesToRawModel(string path)
         {
+            Header header = new Header();
+
             StreamReader rdr = new StreamReader(path);
             string line;
             while ((line = rdr.ReadLine()) != null)
             {
                 if (line.Contains(ParseRules.HistoricalDataLogger))
                 {
-                    ProcessHeader(line);
+                    ProcessHeader(line, header);
                 }
-                //ParseLinesToRawModel()
-                //Debug.WriteLine(line);
+                else if (line.Contains(ParseRules.WaferId))
+                {
+                    ProcessWaferRecipe(line, header);
+                }
+                else if (line.Contains(ParseRules.Equipment))
+                {
+                    ProcessEquipment(line, header);
+                }
             }
 
             rdr.Close();
         }
 
-        private void ProcessHeader(string line)
+        
+
+
+        #region Header etc (non data rows)
+        private void ProcessHeader(string line, Header header)
         {
             try
             {
                 // Here goes the logic: 
                 // 1. We are looking for end of path (\ character) -> Filename is everything after that
                 // 2. Split line by . separator and all other data is splitted in array
-                // 3. Extract file type from position 0 - depending if file has std or process in filename
+                // 3. Extract file type from position 0 - depending if file has std or process in filename (a bit more splitting)
                 // 4. Rest is only formatting data
                 int indexOfPathEnd = line.LastIndexOf(ParseRules.L1_0PathEnd) + 1;
                 string fileName = line.Substring(indexOfPathEnd, line.Length - indexOfPathEnd);
 
                 string[] splitByDot = line.Split('.');
-                DateTime date = GenerateDateTime(splitByDot[3], splitByDot[4]);
-                
+                DateTime date = GenerateDateTimeHeader(splitByDot[3], splitByDot[4]);
+
+                header.FileName = fileName;
+                header.DateAndTime = date;
 
                 if (line.ToLower().Contains("std"))
                 {
                     string[] splitProcessAndFileType = splitByDot[0].Split('\\');
                     string[] std_pm = splitProcessAndFileType[2].Split('_');
-                    string std = std_pm[0];
-                    string pm = std_pm[1];
+                    header.FileTyp = std_pm[0];
+                    header.Prozessmodul = std_pm[1];
                 }
                 else if (line.ToLower().Contains("process"))
                 {
                     string[] splitProcessAndFileType = splitByDot[0].Split('\\');
-                    string fileType = splitProcessAndFileType[1];
-                    string pm = splitProcessAndFileType[2];
+                    header.FileTyp = splitProcessAndFileType[1];
+                    header.Prozessmodul = splitProcessAndFileType[2];
                 }
                 else
                     throw new Exception("ProcessFileName method -> File structure is not recognized:");
@@ -105,12 +120,12 @@ namespace DataImporter.Repository
             }
             catch (Exception ex)
             {
-                Logger.Log(ex.Message);
+                Logger.Log("ProcessHeader", PathName, ex.Message);
             }
             
         }
 
-        private DateTime GenerateDateTime(string dateString, string timeString)
+        private DateTime GenerateDateTimeHeader(string dateString, string timeString)
         {
             string[] dateSplitted = dateString.Split('-');
             string[] timeSplitted = timeString.Split('-');
@@ -119,6 +134,19 @@ namespace DataImporter.Repository
                                 int.Parse(timeSplitted[0]), int.Parse(timeSplitted[1]), int.Parse(timeSplitted[2]));
         }
 
-      
+        private void ProcessWaferRecipe(string line, Header header)
+        {
+            char[] delimiters = new char[] { ' ', '\t' };
+            string[] splitLine = line.Split(delimiters);
+            header.WaferId = splitLine[3];
+            header.Recipe = splitLine[5];
+        }
+
+        private void ProcessEquipment(string line, Header header)
+        {
+
+        }
+
+        #endregion
     }
 }

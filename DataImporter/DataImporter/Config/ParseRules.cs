@@ -8,13 +8,12 @@ namespace DataImporter.Config
 {
     static class ParseRules
     {
-        // This properties are some kind of checkpoint
+        // This properties serve as markers
         // 1. Line rules
         public static string HistoricalDataLogger { get { return "HistoricalDataLogger file:"; } }
-        /// <summary>
-        /// Last index of should be sought
-        /// </summary>
+        
         public static string L1_0PathEnd { get { return @"\"; } }
-
+        public static string WaferId { get { return "waferId"; } }
+        public static string Equipment { get { return "Equipment:"; } }
     }
 }

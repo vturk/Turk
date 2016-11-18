@@ -14,5 +14,6 @@ namespace DataImporter.Models
         public int Slotnummer { get; set; }
         public string ProcesID { get; set; }
         public DateTime DateAndTime { get; set; }
+        public string FileName { get; internal set; }
     }
 }
