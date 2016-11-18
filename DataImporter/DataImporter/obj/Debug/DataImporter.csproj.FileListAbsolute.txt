@@ -1,0 +1,16 @@
+D:\Github\Turk\DataImporter\DataImporter\bin\Debug\DataImporter.exe.config
+D:\Github\Turk\DataImporter\DataImporter\bin\Debug\DataImporter.exe
+D:\Github\Turk\DataImporter\DataImporter\bin\Debug\DataImporter.pdb
+D:\Github\Turk\DataImporter\DataImporter\obj\Debug\DataImporter.csprojResolveAssemblyReference.cache
+D:\Github\Turk\DataImporter\DataImporter\obj\Debug\MainWindow.g.cs
+D:\Github\Turk\DataImporter\DataImporter\obj\Debug\App.g.cs
+D:\Github\Turk\DataImporter\DataImporter\obj\Debug\DataImporter_MarkupCompile.cache
+D:\Github\Turk\DataImporter\DataImporter\obj\Debug\DataImporter_MarkupCompile.lref
+D:\Github\Turk\DataImporter\DataImporter\obj\Debug\MainWindow.baml
+D:\Github\Turk\DataImporter\DataImporter\obj\Debug\DataImporter.g.resources
+D:\Github\Turk\DataImporter\DataImporter\obj\Debug\DataImporter.Properties.Resources.resources
+D:\Github\Turk\DataImporter\DataImporter\obj\Debug\DataImporter.csproj.GenerateResource.Cache
+D:\Github\Turk\DataImporter\DataImporter\obj\Debug\DataImporter.exe
+D:\Github\Turk\DataImporter\DataImporter\obj\Debug\DataImporter.pdb
+D:\Github\Turk\DataImporter\DataImporter\bin\Debug\log4net.dll
+D:\Github\Turk\DataImporter\DataImporter\bin\Debug\log4net.xml

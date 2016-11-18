@@ -1,0 +1,56 @@
+﻿<Window x:Class="DataImporter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataImporter"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="268*"/>
+            <ColumnDefinition Width="94*"/>
+            <ColumnDefinition Width="11*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="44*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="43*"/>
+            <RowDefinition Height="49*"/>
+            <RowDefinition Height="153*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Content="Text importer / parser tool"   />
+
+        <Label Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" FontSize="15" Height="30" >Folder location:</Label>
+        <TextBox Name="txtPath" Grid.Row="2" VerticalContentAlignment="Center" FontSize="15" Text="E:\Turk" Background="#FFDEE9F7" Grid.Column="1"/>
+
+        <Label Grid.Row="1" Grid.Column="2" FontSize="15">File extension:</Label>
+        <TextBox Name="txtExtension" Grid.Row="2" Grid.Column="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Text="txt" Background="#FFDEE9F7"></TextBox>
+
+
+        <Grid Grid.Row="3" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnStart" Content="Start Import" Grid.Column="0" Foreground="White" Click="btnStart_Click" >
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF08B200" Offset="0"/>
+                        <GradientStop Color="#FF056600" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="btnStop" Content="Stop Import" Grid.Column="1" Foreground="White" Click="btnStop_Click" >
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFC10000" Offset="1"/>
+                        <GradientStop Color="#FFAE0404"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </Grid>
+        <ListBox x:Name="lboxInfo" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Background="#FF12839C" />
+    </Grid>
+</Window>

@@ -1,0 +1,26 @@
+﻿using log4net;
+using log4net.Config;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DataImporter.Config
+{
+    class Logger
+    {
+        //private static readonly ILog log = LogManager.GetLogger(typeof(Logger));
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        //public Logger()
+        //{
+        //    // Set up a simple configuration that logs on the console.
+        //    BasicConfigurator.Configure();
+        //}
+
+        public static void Log(string text)
+        {
+            log.Info(text);
+        }
+    }
+}
